@@ -1,0 +1,172 @@
+<odoo>
+
+<data>
+
+<!-- explicit list view definition -->
+
+  
+
+<record model="ir.ui.view" id="estate.list">
+<field name="name">estate list</field>
+<field name="model">estate.property</field>
+<field name="arch" type="xml">
+<tree>
+  <field name="name"/>
+  <field name="expected_price"/>
+  <field name="garden_orientation"/>
+  <field name ="postcode"/>
+  <field name ="bedrooms"/>
+  <field name = "living_area" string="Living Area(sqm)"/>
+  <field name ="selling_price"/>
+  <field name ="date_availability" string ="Avaialble From" />
+</tree>
+</field>
+</record>
+<record id="estate_property_view_form" model="ir.ui.view">
+<field name="name">estate.property.form</field>
+<field name="model">estate.property</field>
+<field name="arch" type="xml">
+<form string="property">
+<sheet>
+  <div class="oe_title">
+  <div class="oe_edit_only">
+  <label for="name"/>
+  </div>
+  <h1 class="mb32">
+  <field name="name" class="mb16"/>
+  </h1>
+  </div>
+  <group>
+    <group>
+      <field name ="postcode"/>
+      <field name="expected_price"/>
+    </group>
+    <group>
+      <field name="date_availability"/>
+      <field name="selling_price"/>
+      <field name="active" invisible="1"/>
+    </group>
+  </group>
+<notebook>
+<page string="Description" name="Description">
+  <group>
+    <field name="description"/>
+    <field name="bedrooms"/>
+    <field name ="garage" string="Is garage"/>
+    <field name ="garden" string="is Garden"/>
+    <field name ="garden_area" string="Garden Area(sqm)"/>
+    <field name ="garden_orientation"/>
+    <field name ="state"/>
+    <field name ="property_type_id" string ="Property Type"/>
+  </group>
+</page>
+<page string="Info" name="info">
+  <group>
+    <field name ="partner_id" string ="Buyer"/>
+    <field name ="sales_person_id" string ="Sales Person"/>
+  </group>
+</page>
+</notebook>
+</sheet>
+</form>
+</field>
+</record>
+
+  
+  
+<record id="estate_estate_search" model="ir.ui.view">
+<field name ="name"> estate.property.search</field>
+<field name ="model">estate.property</field>
+<field name ="arch" type ="xml">
+<search string="Property Search">
+  <field name ="name" string="name"/>
+  <field name ="postcode" string="Post Code"/>
+   <field name ="bedrooms" string="No of bed Rooms"/>
+   <field name ="state" string="status"/>
+  <group>
+  <filter string= "Garage Avaialble" name ="garage" context="{'group_by':'garage', 'garage':True}"/>
+  <filter string= "Garage Avaialble" name ="garage" domain="[('garage', '=', True)]"/>
+  <filter string= "Status" name ="state" context="{'group_by':'state'}"/>
+   <filter string= "Offer Recieved" name ="state" domain="[('state', '=', 'offer_recived')]"/>
+  </group>
+</search>
+</field>
+</record>
+
+<!-- actions opening views on models -->
+
+  
+
+<record model="ir.actions.act_window" id="estate.action_window">
+<field name="name">Properties</field>
+<field name="res_model">estate.property</field>
+<field name="view_mode">tree,form</field>
+</record>
+
+  
+  
+
+<!-- server action to the one above -->
+
+  
+
+<!-- <record model="ir.actions.server" id="estate.action_server">
+
+<field name="name">estate server</field>
+
+<field name="model_id" ref="model_estate_estate"/>
+
+<field name="state">code</field>
+
+<field name="code">
+
+action = {
+
+"type": "ir.actions.act_window",
+
+"view_mode": "tree,form",
+
+"res_model": model._name,
+
+}
+
+</field>
+
+</record> -->
+
+  
+  
+
+<!-- Top menu item -->
+
+  
+
+<menuitem name="Real Estate" id="estate.menu_root"/>
+
+<!-- menu categories -->
+
+  
+
+<menuitem name="Advertisement" id="estate.properties" parent="estate.menu_root"/>
+
+<!-- <menuitem name="Menu 2" id="estate.menu_2" parent="estate.menu_root"/> -->
+
+  
+
+<!-- actions -->
+
+  
+
+<menuitem name="Properties" id="estate.properties_list" parent="estate.properties"
+
+action="estate.action_window"/>
+
+<!-- <menuitem name="Server to list" id="estate" parent="estate.menu_2"
+
+action="estate.action_server"/> -->
+
+  
+
+</data>
+
+</odoo>

@@ -1,0 +1,52 @@
+
+<odoo>
+  <data>
+    <record id="estate_property_tag_form" model="ir.ui.view">
+      <field name="name">estate.property.tag.form</field>
+      <field name="model">estate.property.tag</field>
+      <field name="arch" type="xml">
+        <form string="Property Tag">
+          <sheet>
+            <div class="oe_title">
+              <div class="oe_edit_only">
+                <label for="name"/>
+                <h1 class="mb32">
+                  <field name="name" class="mb16"/>
+                </h1>
+              </div>
+            </div>
+          </sheet>
+        </form>
+      </field>
+    </record>
+    <record id="estate_property_tag_tree" model="ir.ui.view">
+      <field name="name">estate.property.tag.tree</field>
+      <field name="model">estate.property.tag</field>
+      <field name="arch" type="xml">
+      <tree>
+        <field name ="name"/>
+      </tree>
+      </field>
+    </record>
+
+    <record id ="estate_property_tag_action" model ="ir.actions.act_window">
+        <field name ="name">estate.property.tag.action</field>
+        <field name ="res_model">estate.property.tag</field>
+        <field name ="view_mode"> tree,form</field>
+    </record>
+    
+    
+    <record id="estate_property_tag_search" model ="ir.ui.view">
+        <field name ="name"> estate.property.tag.search</field>
+        <field name ="model"> estate.property.tag</field>
+        <field name="arch" type="xml">
+        <search string ="Name">
+            <field name ="name"/>
+        </search>
+        </field>
+    </record>
+
+    <menuitem id="property_tag_menu" name ="Property Tag" parent = "property_type_menu_root" action ="estate_property_tag_action"/>
+
+  </data>
+</odoo>
