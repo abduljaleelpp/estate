@@ -29,5 +29,5 @@ class EstateProperty(models.Model):
     property_type_id = fields.Many2one("estate.property.type" , string="Property Type")
     partner_id = fields.Many2one("res.partner", string="Partner")
     sales_person_id = fields.Many2one("res.users", string ="Sales Person")
-    tag_ids =fields.Many2many("estate.property.tag",string="Tags")
-      
+    tag_ids = fields.Many2many("estate.property.tag",string="Tags")
+    offer_ids = fields.One2many("estate.property.offer", 'property_id', string="offers")

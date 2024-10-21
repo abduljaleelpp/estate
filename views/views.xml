@@ -32,9 +32,10 @@
   <div class="oe_edit_only">
   <label for="name"/>
   </div>
-  <h1 class="mb32">
+  <h2 class="mb16">
   <field name="name" class="mb16"/>
-  </h1>
+  </h2>
+  <field name="tag_ids" widget="many2many_tags"/>
   </div>
   <group>
     <group>
@@ -59,6 +60,15 @@
     <field name ="state"/>
     <field name ="property_type_id" string ="Property Type"/>
   </group>
+</page>
+<page string="Offers">
+  <field name="offer_ids">
+    <!-- <tree>
+      <field name="price"/>
+      <field name="partner_id"/>
+      <field name="status"/>
+    </tree> -->
+  </field>
 </page>
 <page string="Info" name="info">
   <group>
