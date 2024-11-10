@@ -7,8 +7,12 @@
             <field name="model">estate.property.type</field>
             <field name="arch" type="xml">
                 <form string="Property Type">
-                    <sheet>
-                    
+                    <sheet> 
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" type="action" name="%(action_view_estate_property_offers_filtered)d" invisible="offer_count==0"  icon="fa-money">
+                                 <field name="offer_count" widget="statinfo"/>
+                            </button>
+                        </div>
                         <div class="oe_title">
                             <div class="oe_edit_only">
                                 <label for="name"/>
@@ -19,7 +23,7 @@
                         </div>
                         <notebook>
                         <page string ="Associated Properties">
-                            <field name ="property_type_ids">
+                            <field name ="property_ids">
                                 <tree>
                                     <field name ="name"/>
                                     <field name ="expected_price"/>
@@ -61,7 +65,7 @@
             <field name="res_model">estate.property.type</field>
             <field name="view_mode">tree,form</field>
         </record>
-
+   
         <!-- Menu -->
         <menuitem name="Settings" id="property_type_menu_root"  parent="estate.menu_root" />
         <menuitem name="Property Types" id="property_type_menu" parent="property_type_menu_root" action="estate_property_type_action"/>

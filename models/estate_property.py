@@ -28,7 +28,7 @@ class EstateProperty(models.Model):
     active =fields.Boolean( default =True)
     state =fields.Selection( selection=[('new','New'),('offer_received','Offer Received'),('offer_accepted',"Offer Accepted"),('sold','Sold'),('cancelled','Cancelled')],default ='new',required =True,copy =False)
     property_type_id = fields.Many2one("estate.property.type" , string="Property Type")
-    partner_id = fields.Many2one("res.partner", string="Partner")
+    partner_id = fields.Many2one("res.partner", string="Buyer")
     sales_person_id = fields.Many2one("res.users", string ="Sales Person", index=True, tracking=True, default=lambda self: self.env.user)
     tag_ids = fields.Many2many("estate.property.tag",string="Tags")
     offer_ids = fields.One2many("estate.property.offer", 'property_id', string="offers")
@@ -77,3 +77,12 @@ class EstateProperty(models.Model):
             else:
                 raise UserError("sold and cancelled properties can be set cancelled again")
                 return False
+
+    @api.ondelete(at_uninstall=False)
+    def _check_state_on_delete(self):
+        # Ensure only properties in 'new' or 'cancelled' state can be deleted
+        if any(property.state not in ['new', 'cancelled'] for property in self):
+            raise UserError("Only properties in 'New' or 'Cancelled' state can be deleted.")
+
+
+
